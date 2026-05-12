@@ -118,7 +118,15 @@
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
   /* ─── Masthead ─── */
-  .masthead { border-top: 4px solid var(--super-blue); padding-top: 28px; margin-bottom: 40px; }
+  .masthead {
+    border-top: 4px solid var(--super-blue); padding-top: 28px; margin-bottom: 40px;
+    display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+  }
+  @media (max-width: 760px) {
+    .masthead { grid-template-columns: 1fr; }
+    .masthead__faces { justify-self: start; transform: scale(0.85); transform-origin: left top; }
+  }
+  .masthead__copy { min-width: 0; }
   .masthead__kicker {
     font-size: 11px; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.14em; color: var(--super-blue); margin-bottom: 16px;
@@ -141,6 +149,32 @@
   .masthead__byline span:not(:last-child)::after {
     content: '·'; color: var(--muted-soft); margin-left: 20px;
   }
+
+  /* ─── Faces cluster — MCD&C team logo ─── */
+  .masthead__faces {
+    width: 220px; height: 140px;
+    flex-shrink: 0;
+  }
+  .face-cluster {
+    width: 100%; height: 100%;
+    overflow: visible;
+  }
+  .face-cluster__circle--cyan   { fill: var(--agave-30); }
+  .face-cluster__circle--green  { fill: var(--kiwi-50); }
+  .face-cluster__circle--orange { fill: var(--tomato); }
+  .face-cluster__circle--yellow { fill: var(--honey-40); }
+  .face-cluster__stroke {
+    fill: none; stroke: #1a1a1a; stroke-width: 2.2;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .face-cluster__face {
+    transform-box: fill-box; transform-origin: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .face-cluster:hover .face-cluster__face--cyan   { transform: translateY(-3px) rotate(-3deg); }
+  .face-cluster:hover .face-cluster__face--green  { transform: translateY(-4px) rotate(2deg); }
+  .face-cluster:hover .face-cluster__face--orange { transform: translateY(-3px) rotate(3deg); }
+  .face-cluster:hover .face-cluster__face--yellow { transform: translateY(-3px) rotate(-2deg); }
 
   /* ─── Headline ─── */
   .headline {
@@ -231,6 +265,18 @@
     font-family: var(--font-mono); font-size: 10px; font-weight: 500;
     color: var(--super-blue); background: var(--agave-20);
     padding: 3px 10px; border-radius: 4px;
+  }
+  .reach__note {
+    margin-top: 12px; padding: 8px 10px;
+    background: var(--honey-10); border-left: 3px solid var(--honey-40);
+    border-radius: 4px;
+    font-size: 11px; line-height: 1.45; color: var(--ink);
+    font-style: italic;
+  }
+  .reach__note strong {
+    font-style: normal; font-weight: 700; color: var(--honey-80);
+    text-transform: uppercase; font-size: 9.5px; letter-spacing: 0.08em;
+    margin-right: 4px;
   }
 
   /* ─── Venn diagram for session overlap ─── */
@@ -963,13 +1009,62 @@
 <div class="shell">
 
   <header class="masthead reveal">
-    <div class="masthead__kicker">AI Transformation · Workshop Series Report</div>
-    <h1 class="masthead__title"><strong>Claude for Marketers</strong> — Leadership Dashboard</h1>
-    <div class="masthead__byline">
-      <span>Sessions 1 &amp; 2</span>
-      <span>Apr 22 + May 6, 2026</span>
-      <span>Owner: Sylvia · Maria</span>
-      <span>Source: Master Tracker</span>
+    <div class="masthead__copy">
+      <div class="masthead__kicker">AI Transformation · Workshop Series Report</div>
+      <h1 class="masthead__title"><strong>Claude for Marketers</strong> — Leadership Dashboard</h1>
+      <div class="masthead__byline">
+        <span>Sessions 1 &amp; 2</span>
+        <span>Apr 22 + May 6, 2026</span>
+        <span>Owner: Sylvia · Maria</span>
+        <span>Source: Master Tracker</span>
+      </div>
+    </div>
+    <div class="masthead__faces" aria-label="Marketing Craft Development &amp; Capabilities team mark">
+      <svg class="face-cluster" viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" role="img">
+        <!-- Cyan face — bottom-left -->
+        <g class="face-cluster__face face-cluster__face--cyan">
+          <circle class="face-cluster__circle--cyan" cx="38" cy="88" r="32"/>
+          <!-- Squinty content eyes: v shapes -->
+          <path class="face-cluster__stroke" d="M 24 82 L 28 87 L 32 82"/>
+          <path class="face-cluster__stroke" d="M 42 82 L 46 87 L 50 82"/>
+          <!-- Small upturned smile -->
+          <path class="face-cluster__stroke" d="M 28 96 Q 37 102 46 96"/>
+        </g>
+        <!-- Green face — top-center -->
+        <g class="face-cluster__face face-cluster__face--green">
+          <circle class="face-cluster__circle--green" cx="92" cy="42" r="36"/>
+          <!-- Dot eyes -->
+          <circle cx="82" cy="36" r="2.2" fill="#1a1a1a"/>
+          <circle cx="102" cy="36" r="2.2" fill="#1a1a1a"/>
+          <!-- Tiny nose hint -->
+          <path class="face-cluster__stroke" d="M 92 42 L 94 46 L 91 47" stroke-width="1.8"/>
+          <!-- Wide friendly smile -->
+          <path class="face-cluster__stroke" d="M 78 52 Q 92 64 106 52"/>
+        </g>
+        <!-- Yellow face — bottom-center -->
+        <g class="face-cluster__face face-cluster__face--yellow">
+          <circle class="face-cluster__circle--yellow" cx="108" cy="105" r="28"/>
+          <!-- Squint happy eyes -->
+          <path class="face-cluster__stroke" d="M 98 100 Q 101 96 104 100"/>
+          <path class="face-cluster__stroke" d="M 112 100 Q 115 96 118 100"/>
+          <!-- Open-mouth toothy grin: half-circle with horizontal tooth line -->
+          <path class="face-cluster__stroke" d="M 100 108 Q 108 120 116 108 Z" fill="#ffffff"/>
+          <path class="face-cluster__stroke" d="M 100 108 L 116 108"/>
+        </g>
+        <!-- Orange face — top-right with glasses -->
+        <g class="face-cluster__face face-cluster__face--orange">
+          <circle class="face-cluster__circle--orange" cx="170" cy="52" r="34"/>
+          <!-- Round glasses: two circles + bridge -->
+          <circle cx="160" cy="48" r="6" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+          <circle cx="180" cy="48" r="6" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+          <path class="face-cluster__stroke" d="M 166 48 L 174 48" stroke-width="1.8"/>
+          <!-- Eyes inside glasses (dots) -->
+          <circle cx="160" cy="48" r="1.6" fill="#1a1a1a"/>
+          <circle cx="180" cy="48" r="1.6" fill="#1a1a1a"/>
+          <!-- Subtle smile -->
+          <path class="face-cluster__stroke" d="M 160 62 Q 170 68 180 62"/>
+        </g>
+      </svg>
     </div>
   </header>
 
@@ -1301,13 +1396,48 @@
 <div class="shell">
 
   <header class="masthead reveal">
-    <div class="masthead__kicker">Claude 10 Skills Taskforce · Skills Hub Launch Report</div>
-    <h1 class="masthead__title"><strong>Skills Library</strong> — Launch Analytics</h1>
-    <div class="masthead__byline">
-      <span>Apr 29 – May 11, 2026</span>
-      <span>Owner: Sylvia</span>
-      <span>growyourcraft.intuit.com/craft/gen-ai</span>
-      <span>Source: Hub Analytics</span>
+    <div class="masthead__copy">
+      <div class="masthead__kicker">Claude 10 Skills Taskforce · Skills Hub Launch Report</div>
+      <h1 class="masthead__title"><strong>Skills Library</strong> — Launch Analytics</h1>
+      <div class="masthead__byline">
+        <span>Apr 29 – May 11, 2026</span>
+        <span>Owner: Sylvia</span>
+        <span>growyourcraft.intuit.com/craft/gen-ai</span>
+        <span>Source: Hub Analytics</span>
+      </div>
+    </div>
+    <div class="masthead__faces" aria-label="Marketing Craft Development &amp; Capabilities team mark">
+      <svg class="face-cluster" viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" role="img">
+        <g class="face-cluster__face face-cluster__face--cyan">
+          <circle class="face-cluster__circle--cyan" cx="38" cy="88" r="32"/>
+          <path class="face-cluster__stroke" d="M 24 82 L 28 87 L 32 82"/>
+          <path class="face-cluster__stroke" d="M 42 82 L 46 87 L 50 82"/>
+          <path class="face-cluster__stroke" d="M 28 96 Q 37 102 46 96"/>
+        </g>
+        <g class="face-cluster__face face-cluster__face--green">
+          <circle class="face-cluster__circle--green" cx="92" cy="42" r="36"/>
+          <circle cx="82" cy="36" r="2.2" fill="#1a1a1a"/>
+          <circle cx="102" cy="36" r="2.2" fill="#1a1a1a"/>
+          <path class="face-cluster__stroke" d="M 92 42 L 94 46 L 91 47" stroke-width="1.8"/>
+          <path class="face-cluster__stroke" d="M 78 52 Q 92 64 106 52"/>
+        </g>
+        <g class="face-cluster__face face-cluster__face--yellow">
+          <circle class="face-cluster__circle--yellow" cx="108" cy="105" r="28"/>
+          <path class="face-cluster__stroke" d="M 98 100 Q 101 96 104 100"/>
+          <path class="face-cluster__stroke" d="M 112 100 Q 115 96 118 100"/>
+          <path class="face-cluster__stroke" d="M 100 108 Q 108 120 116 108 Z" fill="#ffffff"/>
+          <path class="face-cluster__stroke" d="M 100 108 L 116 108"/>
+        </g>
+        <g class="face-cluster__face face-cluster__face--orange">
+          <circle class="face-cluster__circle--orange" cx="170" cy="52" r="34"/>
+          <circle cx="160" cy="48" r="6" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+          <circle cx="180" cy="48" r="6" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+          <path class="face-cluster__stroke" d="M 166 48 L 174 48" stroke-width="1.8"/>
+          <circle cx="160" cy="48" r="1.6" fill="#1a1a1a"/>
+          <circle cx="180" cy="48" r="1.6" fill="#1a1a1a"/>
+          <path class="face-cluster__stroke" d="M 160 62 Q 170 68 180 62"/>
+        </g>
+      </svg>
     </div>
   </header>
 
@@ -1336,6 +1466,7 @@
         <div class="reach__label">% of TAM reached</div>
         <div class="reach__num" data-count="29" data-suffix="%">0</div>
         <p class="reach__sub">234 of 801 total addressable marketers reached the Hub in the launch window.</p>
+        <p class="reach__note"><strong>Note:</strong> Excludes Google Analytics data, which is aggregate-only and can't be matched to individual visitors against the TAM list.</p>
       </div>
       <div class="reach__cell">
         <div class="reach__label">Repeat visitors</div>
